@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="iZy-Ne-zkh">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Main View Controller-->
+        <scene sceneID="NpE-tY-AkI">
+            <objects>
+                <viewController id="iZy-Ne-zkh" customClass="MainViewController" customModule="Arkanoid" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="X6s-Mz-eHV">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qqE-ol-Sa7">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Srd-OD-K8F">
+                                        <rect key="frame" x="132" y="384" width="150" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="150" id="ObO-61-knj"/>
+                                            <constraint firstAttribute="height" constant="50" id="mX9-dj-ftS"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="Start"/>
+                                        <connections>
+                                            <action selector="startButtonTapWithSender:" destination="iZy-Ne-zkh" eventType="touchUpInside" id="lVM-MM-RZU"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.3011167561349693" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="Srd-OD-K8F" firstAttribute="centerX" secondItem="qqE-ol-Sa7" secondAttribute="centerX" id="J7N-h0-bEq"/>
+                                    <constraint firstItem="Srd-OD-K8F" firstAttribute="centerY" secondItem="qqE-ol-Sa7" secondAttribute="centerY" id="Qa5-Vp-137"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="qqE-ol-Sa7" firstAttribute="top" secondItem="Txm-Iq-TeR" secondAttribute="top" id="HQJ-qH-hOW"/>
+                            <constraint firstItem="Txm-Iq-TeR" firstAttribute="bottom" secondItem="qqE-ol-Sa7" secondAttribute="bottom" id="SFg-1X-dqa"/>
+                            <constraint firstItem="Txm-Iq-TeR" firstAttribute="trailing" secondItem="qqE-ol-Sa7" secondAttribute="trailing" id="Tpl-CP-VwZ"/>
+                            <constraint firstItem="qqE-ol-Sa7" firstAttribute="leading" secondItem="Txm-Iq-TeR" secondAttribute="leading" id="g6p-1a-mZY"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Txm-Iq-TeR"/>
+                    </view>
+                    <connections>
+                        <outlet property="blindView" destination="qqE-ol-Sa7" id="Z9j-8Y-R3f"/>
+                        <outlet property="startButton" destination="Srd-OD-K8F" id="M4m-uI-xLr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GCY-7h-rdc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="14" y="79"/>
+        </scene>
+    </scenes>
+</document>
