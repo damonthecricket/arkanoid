@@ -63,22 +63,7 @@ class MainViewController: UIViewController, EmiterDelegate {
         emiter.direction = EmiterConstants.Direction.leftUp
         emiter.delegate = self
 
-        var lastX: CGFloat = 0.0
-        var lastY: CGFloat = UIApplication.shared.statusBarFrame.height
-        for _ in 0 ..< 6 {
-            let count = 5
-            lastX = 0.0
-            for _ in 0 ... count {
-                let blockWidth = view.bounds.width / CGFloat(count)
-                let blockView = UIView(frame: CGRect(x: lastX, y: lastY , width: blockWidth, height: 20.0))
-                lastX = blockView.frame.maxX
-                blockView.backgroundColor = .blue
-                blockViews.append(blockView)
-                view.addSubview(blockView)
-            }
-            let last = blockViews.last!
-            lastY = last.frame.maxY
-        }
+        placeBlocks()
         
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(panGestureRecognizer(recognizer:)))
         view.addGestureRecognizer(panGestureRecognizer)
@@ -157,6 +142,20 @@ class MainViewController: UIViewController, EmiterDelegate {
             emiter.stop()
             blindView?.isHidden = false
             landBall()
+            placeBlocks()
+        } else if let block = blockViews.filter({(vY <= $0.frame.maxY && vMaxX >= $0.frame.minX && vX <= $0.frame.maxX)}).first {
+            block.removeFromSuperview()
+            blockViews.removeAll(where: {$0 == block})
+            if blockViews.isEmpty {
+                emiter.stop()
+                blindView?.isHidden = false
+                landBall()
+                placeBlocks()
+            } else if emiter.direction == EmiterConstants.Direction.leftUp {
+                emiter.direction = EmiterConstants.Direction.leftDown
+            } else {
+                emiter.direction = EmiterConstants.Direction.rightDown
+            }
         }
     }
     
@@ -164,5 +163,28 @@ class MainViewController: UIViewController, EmiterDelegate {
         let ballX = platformView.center.x - Constants.Ball.size / 2.0
         let ballY = platformView.frame.origin.y - Constants.Ball.size
         ballView.frame = CGRect(x: ballX, y: ballY, width: Constants.Ball.size, height: Constants.Ball.size)
+    }
+    
+    func placeBlocks() {
+        for v in blockViews {
+            v.removeFromSuperview()
+        }
+        blockViews.removeAll()
+        var lastX: CGFloat = 0.0
+        var lastY: CGFloat = UIApplication.shared.statusBarFrame.height
+        for _ in 0 ..< 6 {
+            let count = 5
+            lastX = 0.0
+            for _ in 0 ... count {
+                let blockWidth = view.bounds.width / CGFloat(count)
+                let blockView = UIView(frame: CGRect(x: lastX, y: lastY , width: blockWidth, height: 20.0))
+                lastX = blockView.frame.maxX
+                blockView.backgroundColor = .blue
+                blockViews.append(blockView)
+                view.addSubview(blockView)
+            }
+            let last = blockViews.last!
+            lastY = last.frame.maxY
+        }
     }
 }
