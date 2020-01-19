@@ -146,6 +146,9 @@ class MainViewController: UIViewController, EmiterDelegate {
         } else if let block = blockViews.filter({(vY <= $0.frame.maxY && vMaxX >= $0.frame.minX && vX <= $0.frame.maxX)}).first {
             block.removeFromSuperview()
             blockViews.removeAll(where: {$0 == block})
+            
+            print("block count = \(blockViews.count)")
+            
             if blockViews.isEmpty {
                 emiter.stop()
                 blindView?.isHidden = false
@@ -172,10 +175,10 @@ class MainViewController: UIViewController, EmiterDelegate {
         blockViews.removeAll()
         var lastX: CGFloat = 0.0
         var lastY: CGFloat = UIApplication.shared.statusBarFrame.height
-        for _ in 0 ..< 6 {
+        for _ in 0 ..< 5 {
             let count = 5
             lastX = 0.0
-            for _ in 0 ... count {
+            for _ in 0 ... count - 1 {
                 let blockWidth = view.bounds.width / CGFloat(count)
                 let blockView = UIView(frame: CGRect(x: lastX, y: lastY , width: blockWidth, height: 20.0))
                 lastX = blockView.frame.maxX
@@ -183,8 +186,7 @@ class MainViewController: UIViewController, EmiterDelegate {
                 blockViews.append(blockView)
                 view.addSubview(blockView)
             }
-            let last = blockViews.last!
-            lastY = last.frame.maxY
+            lastY = blockViews.last!.frame.maxY
         }
     }
 }
